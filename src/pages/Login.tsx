@@ -1,28 +1,42 @@
 import { FaUser, FaGlobe, FaMoon } from "react-icons/fa";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [isLogginIn, setIsLogginIn] = useState(true);
+  const [isLoggingIn, setIsLoggingIn] = useState(true);
   const [isRegistering, setIsRegistering] = useState(false);
 
-  const [isRecovering, setIsRecovering] = useState(false)
+  const [isRecovering, setIsRecovering] = useState(false);
 
+  useEffect(() => {
+    console.log("Estados actualizados:");
+    console.log("isLoggingIn:", isLoggingIn);
+    console.log("isRegistering:", isRegistering);
+    console.log("isRecovering:", isRecovering);
+  }, [isLoggingIn, isRegistering, isRecovering]);
 
   const handleRegister = () => {
     setIsRegistering(true);
-    setIsLogginIn(false);
+    setIsLoggingIn(false);
+    setIsRecovering(false);
   };
 
   const handlePasswordRecovery = () => {
-    setIsLogginIn(!true)
-    setIsRecovering(true)
-    
-  }
+    setIsLoggingIn(false);
+    setIsRegistering(false);
+    setIsRecovering(true);
+  };
+
+  const handleBackToLogin = () => {
+    setIsLoggingIn(true);
+    setIsRegistering(false);
+    setIsRecovering(false);
+  };
   return (
     <>
       <video
@@ -36,7 +50,9 @@ const Login = () => {
         Tu navegador no soporta video HTML5.
       </video>
       <nav className="w-full bg-(--sage)/50  text-white flex items-center justify-between px-6 py-4">
-        <div className="text-xl font-bold">Cliendly</div>
+        <Link to="/" onClick={handleBackToLogin}>
+          <div className="text-xl font-bold">Cliendly</div>
+        </Link>
 
         <div className="flex gap-4 text-xl">
           <FaUser className="cursor-pointer hover:text-sage" />
@@ -46,7 +62,7 @@ const Login = () => {
       </nav>
 
       <div className="min-h-screen bg-(--sage)/50 flex justify-center items-center">
-        {isLogginIn ? (
+        {isLoggingIn && !isRecovering && !isRegistering && (
           <div className="flex flex-col lg:flex-row w-full items-center justify-center gap-6 px-4">
             <fieldset className="fieldset bg-(--brunswick-green) border-base-300 rounded-box w-xs border-2 p-6 shadow-lg">
               <img
@@ -55,16 +71,23 @@ const Login = () => {
                 className="p-4"
               />
 
-              <label className="label text-sm text-(--timberwolf)">Correo</label>
+              <label className="label text-sm text-(--timberwolf)">
+                Correo
+              </label>
               <input type="email" className="input" placeholder="Correo" />
 
-              <label className="label text-sm text-(--timberwolf)">Contraseña</label>
+              <label className="label text-sm text-(--timberwolf)">
+                Contraseña
+              </label>
               <input
                 type="password"
                 className="input"
                 placeholder="Contraseña"
               />
-              <a onClick={handlePasswordRecovery} className="link text-sm text-(--timberwolf) hover:text-white font-bold">
+              <a
+                onClick={handlePasswordRecovery}
+                className="link text-sm text-(--timberwolf) hover:text-white font-bold"
+              >
                 He olvidado mi contraseña
               </a>
               <p className="text-sm text-(--timberwolf) font-bold ">
@@ -110,7 +133,8 @@ const Login = () => {
               </div>
             </fieldset>
           </div>
-        ) : (
+        )}
+        {isRegistering && !isLoggingIn && !isRecovering && (
           <div className="min-h-screen  flex justify-center items-center">
             <fieldset className="fieldset bg-(--brunswick-green) border-base-300 rounded-box w-xs border-2 p-6 shadow-lg">
               <img
@@ -119,13 +143,19 @@ const Login = () => {
                 className="p-4"
               />
 
-              <label className="label text-sm text-(--timberwolf)">Nombre</label>
+              <label className="label text-sm text-(--timberwolf)">
+                Nombre
+              </label>
               <input type="email" className="input" placeholder="Nombre" />
 
-              <label className="label text-sm text-(--timberwolf)">Correo</label>
+              <label className="label text-sm text-(--timberwolf)">
+                Correo
+              </label>
               <input type="email" className="input" placeholder="Correo" />
 
-              <label className="label text-sm text-(--timberwolf)">Contraseña</label>
+              <label className="label text-sm text-(--timberwolf)">
+                Contraseña
+              </label>
               <input
                 type="password"
                 className="input"
@@ -135,10 +165,7 @@ const Login = () => {
               <p className="text-(--timberwolf) font-bold text-sm ">
                 ¿Ya tienes cuenta?{" "}
                 <a
-                  onClick={() => {
-                   setIsLogginIn(true)
-                   setIsRegistering(false)
-                  }}
+                  onClick={handleBackToLogin}
                   className="link text-sm text-(--timberwolf) hover:text-white font-bold"
                 >
                   Accede ahora
@@ -151,6 +178,41 @@ const Login = () => {
           </div>
         )}
       </div>
+      {isRecovering && !isRegistering && !isLoggingIn && (
+        <div className="min-h-screen  flex justify-center items-center">
+          <fieldset className="fieldset bg-(--brunswick-green) border-base-300 rounded-box w-xs border-2 p-6 shadow-lg">
+            <img
+              src="../src/assets/Cliendly-w.png"
+              alt="Logo_Cliendly"
+              className="p-4"
+            />
+
+            <label className="label text-sm text-(--timberwolf)">Nombre</label>
+            <input type="email" className="input" placeholder="Nombre" />
+
+            <label className="label text-sm text-(--timberwolf)">Correo</label>
+            <input type="email" className="input" placeholder="Correo" />
+
+            <label className="label text-sm text-(--timberwolf)">
+              Contraseña
+            </label>
+            <input type="password" className="input" placeholder="Contraseña" />
+
+            <p className="text-(--timberwolf) font-bold text-sm ">
+              ¿Ya tienes cuenta?{" "}
+              <a
+                onClick={handleBackToLogin}
+                className="link text-sm text-(--timberwolf) hover:text-white font-bold"
+              >
+                Accede ahora
+              </a>
+            </p>
+            <button className="btn text-sm btn-neutral bg-(--sage) hover:bg-(--hunter-green) transition-transform duration-300 hover:scale-110 text-white mt-4">
+              Entrar
+            </button>
+          </fieldset>
+        </div>
+      )}
     </>
   );
 };
