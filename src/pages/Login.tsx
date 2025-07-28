@@ -10,10 +10,19 @@ const Login = () => {
   const [isLogginIn, setIsLogginIn] = useState(true);
   const [isRegistering, setIsRegistering] = useState(false);
 
+  const [isRecovering, setIsRecovering] = useState(false)
+
+
   const handleRegister = () => {
     setIsRegistering(true);
     setIsLogginIn(false);
   };
+
+  const handlePasswordRecovery = () => {
+    setIsLogginIn(!true)
+    setIsRecovering(true)
+    
+  }
   return (
     <>
       <video
@@ -38,7 +47,7 @@ const Login = () => {
 
       <div className="min-h-screen bg-(--sage)/50 flex justify-center items-center">
         {isLogginIn ? (
-          <div className="flex w-3xl">
+          <div className="flex flex-col lg:flex-row w-full items-center justify-center gap-6 px-4">
             <fieldset className="fieldset bg-(--brunswick-green) border-base-300 rounded-box w-xs border-2 p-6 shadow-lg">
               <img
                 src="../src/assets/Cliendly-w.png"
@@ -55,7 +64,7 @@ const Login = () => {
                 className="input"
                 placeholder="Contraseña"
               />
-              <a className="link text-sm text-(--timberwolf) hover:text-white font-bold">
+              <a onClick={handlePasswordRecovery} className="link text-sm text-(--timberwolf) hover:text-white font-bold">
                 He olvidado mi contraseña
               </a>
               <p className="text-sm text-(--timberwolf) font-bold ">
@@ -71,7 +80,7 @@ const Login = () => {
                 Entrar
               </button>
             </fieldset>
-            <div className="divider divider-horizontal">O</div>
+            <div className="divider  lg:flex-row  lg:divider-horizontal">O</div>
             <fieldset className="fieldset flex flex-col justify-center  items-center bg-(--brunswick-green)/90 border-base-300 rounded-box w-xs border-2 p-6 shadow-lg">
               <div
                 className="px-6 sm:px-0 max-w-sm rounded-2lg"
