@@ -1,7 +1,6 @@
 const Recovery = ({ onBackToLogin }) => {
   return (
- <div className="min-h-screen bg-(--sage)/50 flex justify-center items-start lg:items-center pt-6 lg:pt-0">
-
+    <div className="min-h-screen bg-(--sage)/50 flex justify-center items-start lg:items-center pt-6 lg:pt-0">
       <fieldset className="fieldset bg-(--brunswick-green) border-base-300 rounded-box w-xs border-2 p-6 shadow-lg">
         <img
           src="../src/assets/Cliendly-w.png"

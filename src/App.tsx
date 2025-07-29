@@ -4,7 +4,6 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/dashboard";
 import Home from "./pages/Home";
 
-
 function App() {
   return (
     <BrowserRouter>

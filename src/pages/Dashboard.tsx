@@ -48,9 +48,7 @@ const Dashboard = () => {
         <h1 className="text-3xl  font-bold text-gray-800 mb-6">Inicio</h1>
 
         <div className="bg-white rounded-2xl p-6 shadow-lg min-h-[90%]">
-          <p className="text-gray-700">
-            Contenido de la sección actual.
-          </p>
+          <p className="text-gray-700">Contenido de la sección actual.</p>
         </div>
       </main>
     </div>
