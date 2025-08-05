@@ -1,8 +1,11 @@
-// backend/models/User.ts
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   name: {
+    type: String,
+    required: true,
+  },
+  lastname: {
     type: String,
     required: true,
   },
@@ -17,8 +20,15 @@ const userSchema = new mongoose.Schema({
   },
   profilePicture: {
     type: String,
-    default: "https://tuservidor.com/images/default-user.png",
+    default: "imageholder",
   },
+  phone: {
+    type: String,
+  },
+  birthdate: {
+    type: Date,
+  }
+  
 }, { timestamps: true });
 
 const User = mongoose.model("User", userSchema);

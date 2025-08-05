@@ -30,7 +30,7 @@ const Main = () => {
   };
 
   return (
-    <>
+    <div className="h-screen overflow-hidden relative">
       <BackgroundVideo />
 
       <Navbar onHandleLogin={handleBackToLogin} />
@@ -47,7 +47,7 @@ const Main = () => {
       {isRecovering && !isRegistering && !isLoggingIn && (
         <Recovery onBackToLogin={handleBackToLogin} />
       )}
-    </>
+    </div>
   );
 };
 

@@ -13,10 +13,17 @@
 body {
   margin: 0;
   padding: 0;
-  overflow-y: hidden;
+  overflow: hidden;
+  height: 100vh;
 }
 
-/* Fondo principal (body)	--timberwolf	Muy claro y neutro, no cansa la vista. Perfecto de base.
+html {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Color Palette Guide:
+Fondo principal (body)	--timberwolf	Muy claro y neutro, no cansa la vista. Perfecto de base.
 Navbar / footer	--brunswick-green	Verde muy oscuro, ideal para dar contraste.
 Botones principales (btn-primary)	--sage	Verde calmado, destaca sin ser muy agresivo.
 Botones secundarios	--fern-green	Un poco más serio, buena alternativa sin que parezca deshabilitado.
@@ -24,3 +31,14 @@ Hover de botones	--hunter-green	Más oscuro, se nota bien el cambio.
 Texto principal	--brunswick-green	Bien oscuro, excelente legibilidad sobre fondo claro.
 Fondos de tarjetas / boxes	--timberwolf / blanco	Ligero, aireado. Usa sombra para separar.
 Borders o detalles sutiles	--sage o --fern-green	Agrega color sin cargar visualmente. */
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(120deg); }
+  66% { transform: translateY(5px) rotate(240deg); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
